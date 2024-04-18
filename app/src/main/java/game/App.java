@@ -9,7 +9,7 @@ public class App {
     Scanner scan = new Scanner(System.in);
     String playerName;
     String playerWeapon;
-    String potion = "Heath Potion";
+    String potion = "";
     int playerHP;
     int goblinHP;
     int choice;
@@ -22,19 +22,25 @@ public class App {
         App app;
         // With this you can choose what method you will call first or in what order!
         app = new App();
-        app.displayCharacterInfo();
         app.playerInfo();
+        app.room();
+
     }
 
     public void info() {
 
     }
 
-    public void displayCharacterInfo() {
+    public void playerInfo() {
+        // ----------------
         playerHP = 50;
-        playerCoin = 50;
+        playerCoin = 10;
         playerWeapon = "Knife";
-        innkeeperCoin = 50;
+        innkeeperCoin = 10;
+        potion = "";
+        // ----------------
+
+        // ----------------
         System.out.println("\n----------------------------------------------------------------");
         System.out.println("Welcome adventurer to this world please choose a name: ");
         playerName = scan.nextLine();
@@ -45,9 +51,10 @@ public class App {
         System.out.println("Player Name: " + playerName + "\nPlayer current health " + playerHP
                 + "\nPlayer current coin: " + playerCoin
                 + "\nPlayer current weapon: " + playerWeapon);
+        // ----------------
     }
 
-    public void playerInfo() {
+    public void room() {
 
         System.out.println(
                 "\nYou are located in Inn, in the letter that u received form your brother say that, there is a rumor, that there is one ring that it has Legendary Power, and you need to find it!\n");
@@ -59,59 +66,75 @@ public class App {
         if (choice == 1) {
             inn();
         } else {
-            playerInfo();
+            room();
         }
 
     }
 
     public void inn() {
         System.out.println("\n----------------------------------------------------------------");
+
         System.out.println("You go to the Innkeeper\n");
         System.out.println("----------------------------------------------------------------\n");
         System.out.println("Innkeeper: Greetings stranger how can I help you today?\n");
+        // Player asks about legendary ring (Option 1)
+        // Leads to innkeeper revealing information (if chosen) [-]
         System.out.println("1. Can I ask you question about legendary ring?");
+        // Innkeeper vendor not ready, tomorrow I need to work in on it! [-]
         System.out.println("2. Can I buy something from you?");
+        // Leave option, easy to make so ill implemented after I finish vendor feature!
+        // [-]
         System.out.println("3. Leave");
         System.out.println("----------------------------------------------------------------\n");
 
         choice = scan.nextInt();
+
         System.out.println("\n----------------------------------------------------------------");
         if (choice == 1) {
             System.out.println(
-                    "Sure! So you also heard about that rumor, lets not say out laud! It located in the crossroad on right road that leads to big forest");
+                    "Sure! So you also heard about that rumor, lets not say out laud!\nIt is located in the crossroad on right road that leads to big forest");
             System.out.println(playerName + ": Ah I see thank you!");
             inn();
             System.out.println("----------------------------------------------------------------");
-        }
-        if (choice == 2) {
-            System.out.println("Sure, I have [health potion], [bread] or [wine]!");
-            System.out.println("Innkeeper has " + innkeeperCoin);
+        } else if (choice == 2) {
+            System.out.println("Sure, I have health potion!");
+            System.out.println("Innkeeper has " + innkeeperCoin + " coins.");
 
             System.out.println("1. Health Potion (It can heal you for 5 health.)");
             System.out.println("Health Potion cost 10 coin;");
 
-            System.out.println("2. Bread (That can heal you for 1 health.)");
-            System.out.println("Health Potion cost 10 coin;");
-
-            System.out.println("3. Wine (It can heal you for 2 health)");
-            System.out.println("Health Potion cost 10 coin;");
-
-            System.out.println("4. Leave");
+            System.out.println("2. Leave");
             choice = scan.nextInt();
 
             if (choice == 1) {
-                innkeeperCoin = playerCoin + 10;
-                System.out.println("\nThank you for buying " + potion + "!");
-                System.out.println("Your current balance: " + playerCoin);
+                potion = "Health Potion";
+                playerCoin -= 10; // Deduct player's coin
+                innkeeperCoin += 10; // Increase innkeeper's coin
+                potion = "Health Potion";
+
+                System.out.println("Innkeeper: " + innkeeperCoin);
+                System.out.println("Player: " + playerCoin);
+                System.out.println("You bought item " + potion);
                 inn();
-            } else if (choice == 2) {
-            } else if (choice == 3) {
-            } else if (choice == 4) {
             } else {
                 inn();
             }
-
+        } else if (choice == 3) {
+            townGate();
+        } else {
+            inn();
         }
 
+    }
+
+    // Finish this area []
+    public void townGate() {
+        System.out.println("Guard: Hold! Where are you going citizen, roads are dangerous these days?");
+        System.out.println(
+                playerName
+                        + " I am an adventurer and I want to retrieve legendary ring. Can you please direct me the location of that?");
+        System.out.println("2. ");
+        System.out.println("");
+        System.out.println("");
     }
 }
