@@ -47,7 +47,7 @@ public class App {
         System.out.println();
 
         System.out.println("Player stats:");
-
+        System.out.println("");
         System.out.println("Player Name: " + playerName + "\nPlayer current health " + playerHP
                 + "\nPlayer current coin: " + playerCoin
                 + "\nPlayer current weapon: " + playerWeapon);
@@ -127,14 +127,116 @@ public class App {
 
     }
 
-    // Finish this area []
+    /*
+     * Town gate area that guard giving you direction and reason why you need to
+     * find a Legendary ring [-]
+     */
+
     public void townGate() {
-        System.out.println("Guard: Hold! Where are you going citizen, roads are dangerous these days?");
+        System.out.println(
+                "Guard: Hold! Where are you going citizen, roads are dangerous these days? I shall not let you pass you!\n");
         System.out.println(
                 playerName
-                        + " I am an adventurer and I want to retrieve legendary ring. Can you please direct me the location of that?");
-        System.out.println("2. ");
+                        + ": I am an adventurer and hearing rumor about Legendary Ring to retrieve it for the king.\nCan you please direct me the location of the Legendary Ring?");
         System.out.println("");
-        System.out.println("");
+        System.out.println(
+                "Guard: I see if that is the case the rumors are true the king lost his Legendary Ring while he was hunting. Some scouts have seen goblin wearing the ring on the neck, king have send some warriors to retrieve it but non returned. I wish you luck retrieving it, you will need it. But go to the Crossway not far from here, and from there and you wanna go to the east, its a big forest\n");
+        System.out.println("1. Go to the crossroad");
+        choice = scan.nextInt();
+        if (choice == 1) {
+            crossRoad();
+        } else {
+            townGate();
+        }
     }
+
+    // Crossroad ready, player can choose which why can go[-]
+    public void crossRoad() {
+        System.out.println("\n----------------------------------------------------------------");
+        System.out.println("You are located in the crossroad please choose direction\n");
+        System.out.println(
+                "There is a sign located on each directions:\n North: River a head\n East: A mysteries cave\n West: Forest\n South: Castle\n");
+        System.out.println("1. North");
+        System.out.println("2. West");
+        System.out.println("3. East");
+        System.out.println("4. South");
+        System.out.println("");
+
+        choice = scan.nextInt();
+
+        if (choice == 1) {
+            System.out.println();
+            north();
+        } else if (choice == 2) {
+            west();
+        } else if (choice == 3) {
+            east();
+        } else if (choice == 4) {
+            townGate();
+        } else {
+            crossRoad();
+        }
+
+    }
+
+    /*
+     * North path done [-]
+     * A feature that player can come here and rest and heal them self without
+     * knowing.[-]
+     */
+    public void north() {
+        System.out.println("Location: North");
+        System.out.println("You see the river and you wanted to have a rest and you feel thirsty.");
+        System.out.println(
+                "You drank water from the river, and you felt that you instantly get rested and something magical that you cant explain.");
+        if (playerHP < 45) {
+            playerHP = playerHP + 5;
+            System.out.println("You restore your health by 5 points. " + playerHP);
+        } else if (playerHP > 45) {
+            System.out.println("Your health is maxed. " + playerHP);
+        }
+        System.out.println("");
+        System.out.println("Now that you feel rested, better go back to the crossroad.\n");
+        System.out.println("1. Back to crossroad");
+        choice = scan.nextInt();
+        if (choice == 1) {
+            crossRoad();
+        } else {
+            north();
+        }
+    }
+
+    /* Combat I will do the last main feature[] */
+    public void west() {
+    }
+
+    /* This method is connected to West path method [] */
+    public void attack() {
+    }
+
+    /*
+     * Cave that have powerful sword
+     * Challange is player need to answer the question if he does he will get a
+     * powerful sword;
+     */
+    public void east() {
+        System.out.println("You are in the mysteries cave, you see sword in the stone.\n");
+        System.out.println(
+                "You touched the sword, want to pull sword out from the stone, but you hear noise that come from sword. Ah an adventure. I have one challange for you, answer me this and you will be able to pull the sword and wield this Legendary Sword. If you dont answer correctly you wont be able to pull the sword making you unworthy.");
+        System.out.println("");
+        System.out.println("1. Accept the challange.");
+        System.out.println("2. Leave.");
+        choice = scan.nextInt();
+
+    }
+
+    public void South() {
+    }
+
+    public void castle() {
+    }
+
+    public void dead() {
+    }
+
 }
