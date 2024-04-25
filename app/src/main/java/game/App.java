@@ -17,10 +17,12 @@ public class App {
     int playerCoin;
     int innkeeperCoin;
     int legendaryRing;
+    boolean gameWon;
 
     public static void main(String[] args) {
 
         App app;
+
         // With this you can choose what method you will call first or in what order!
         app = new App();
         app.playerInfo();
@@ -67,6 +69,7 @@ public class App {
         if (choice == 1) {
             inn();
         } else {
+            System.out.println("Invalid choice. Please try again.");
             room();
         }
 
@@ -118,6 +121,7 @@ public class App {
                 System.out.println("You bought item " + potion);
                 inn();
             } else {
+                System.out.println("Invalid choice. Please try again.");
                 inn();
             }
         } else if (choice == 3) {
@@ -144,7 +148,7 @@ public class App {
                 "Guard: I see if that is the case the rumors are true the king lost his Legendary Ring while he was hunting. Some scouts have seen goblin wearing the ring on the neck, king have send some warriors to retrieve it but non returned. I wish you luck retrieving it, you will need it. But go to the Crossway not far from here, and from there and you wanna go to the east, its a big forest\n");
         System.out.println("1. Go to the Crossroad");
         System.out.println("2. Go to the Castle");
-        System.out.println("");
+        System.out.println("\n----------------------------------------------------------------");
         choice = scan.nextInt();
         if (choice == 1) {
             crossRoad();
@@ -170,7 +174,7 @@ public class App {
         System.out.println("2. West");
         System.out.println("3. East");
         System.out.println("4. South");
-        System.out.println("");
+        System.out.println("\n----------------------------------------------------------------");
 
         choice = scan.nextInt();
 
@@ -252,7 +256,7 @@ public class App {
         if (choice == 1) {
             crossRoad();
         } else {
-            west();
+            fight();
         }
     }
 
@@ -272,7 +276,7 @@ public class App {
         }
         if (playerWeapon.equals("Excalibur")) {
             // weaponDamage = 8;
-            playerDamage = new java.util.Random().nextInt(8);
+            playerDamage = new java.util.Random().nextInt(9);
         }
         // --------------------
 
@@ -315,9 +319,10 @@ public class App {
     public void win() {
         System.out.println("");
         System.out.println(
-                "You defeated the goblin! and now you get Legendary Ring from goblin,\ntime to back to the Castle.");
-
-        end();
+                "You defeated the goblin! and now you get Legendary Ring from goblin,\ntime to back to the Castle.\n");
+        legendaryRing = legendaryRing + 1;
+        System.out.println("You acquire: " + legendaryRing);
+        crossRoad();
     }
 
     /*
@@ -358,7 +363,7 @@ public class App {
             System.out.println("Congratulations! You are worthy to wield " + playerWeapon);
             System.out.println("\n----------------------------------------");
             System.out.println("You may leave the cave now!");
-            System.out.println("(Press any button to continue to leave a cave)");
+            System.out.println("(Press 1 to continue to leave a cave)");
             choice = scan.nextInt();
             if (choice == 1) {
                 crossRoad();
@@ -380,6 +385,7 @@ public class App {
         System.out.println("You defeated the game congratulations!");
         System.out.println("The End");
         System.out.println("\n----------------------------------------------------------------");
+        System.exit(0);
     }
 
 }
