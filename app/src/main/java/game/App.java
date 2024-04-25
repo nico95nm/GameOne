@@ -17,7 +17,7 @@ public class App {
     int playerCoin;
     int innkeeperCoin;
     int legendaryRing;
-    boolean gameWon;
+    private boolean hasUsedPotion = false;
 
     public static void main(String[] args) {
 
@@ -247,14 +247,18 @@ public class App {
         System.out.println("You encounter a goblin!\n");
         System.out.println("1. Fight.");
         System.out.println("2. Run");
+        System.out.println("3. Use Potion");
         System.out.println("\n-----------------------");
 
         choice = scanOne.nextInt();
         if (choice == 1) {
             attack();
         }
-        if (choice == 1) {
+        if (choice == 2) {
             crossRoad();
+        }
+        if (choice == 3) {
+            usePotion();
         } else {
             fight();
         }
@@ -309,6 +313,21 @@ public class App {
 
     }
 
+    public void usePotion() {
+        if (playerCoin >= 10 && !hasUsedPotion && playerHP < 25) {
+            playerHP += 5;
+            System.out.println("You use a health potion and restore 5 health. Your current health: " + playerHP);
+            hasUsedPotion = true;
+        } else if (playerHP >= 25) {
+            System.out.println("Your health is already full. You don't need a potion.");
+        } else if (hasUsedPotion) {
+            System.out.println("You've already used a potion in this fight. You can't use another one right now.");
+        } else {
+            System.out.println("You don't have enough coins to buy a potion.");
+        }
+        fight();
+    }
+
     public void dead() {
         System.out.println("\n-----------------------");
         System.out.println("\nGAME OVER!");
@@ -321,7 +340,7 @@ public class App {
         System.out.println(
                 "You defeated the goblin! and now you get Legendary Ring from goblin,\ntime to back to the Castle.\n");
         legendaryRing = legendaryRing + 1;
-        System.out.println("You acquire: " + legendaryRing);
+        System.out.println("You acquire: Legendary Ring");
         crossRoad();
     }
 
@@ -375,11 +394,8 @@ public class App {
         }
     }
 
-    public void South() {
-    }
-
     public void end() {
-        System.out.println("Good job adventurer for bringing me back my powerful ring!");
+        System.out.println("King: Good job adventurer for bringing me back my powerful ring!");
 
         System.out.println("\n----------------------------------------------------------------");
         System.out.println("You defeated the game congratulations!");
